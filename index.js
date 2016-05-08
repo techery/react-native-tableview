@@ -61,7 +61,7 @@ var TableView = React.createClass({
          * `{0, 0, 0, 0}`.
          * @platform ios
          */
-        scrollIndicatorInsets: React.EdgeInsetsPropType,
+        scrollIndicatorInsets: EdgeInsetsPropType,
         tableViewCellEditingStyle: React.PropTypes.number,
     },
 
