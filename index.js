@@ -1,6 +1,6 @@
 'use strict';
-var React = require('react-native');
-var {NativeMethodsMixin, ReactNativeViewAttributes, NativeModules, StyleSheet, View,requireNativeComponent} = React;
+var React = require('react');
+var {NativeMethodsMixin, NativeModules, StyleSheet, View,requireNativeComponent} = require('react-native');
 var RNTableViewConsts = NativeModules.UIManager.RNTableView.Constants;
 var resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
 
