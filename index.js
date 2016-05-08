@@ -1,6 +1,14 @@
 'use strict';
 var React = require('react');
-var {NativeMethodsMixin, NativeModules, StyleSheet, View,requireNativeComponent} = require('react-native');
+var {
+  NativeMethodsMixin,
+  NativeModules,
+  StyleSheet,
+  View,
+  requireNativeComponent,
+  EdgeInsetsPropType,
+  PointPropType
+} = require('react-native');
 var RNTableViewConsts = NativeModules.UIManager.RNTableView.Constants;
 var resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource');
 
@@ -39,13 +47,13 @@ var TableView = React.createClass({
          * of the TableView. Defaults to `{0, 0, 0, 0}`.
          * @platform ios
          */
-        contentInset: React.EdgeInsetsPropType,
+        contentInset: EdgeInsetsPropType,
         /**
          * Used to manually set the starting scroll offset.
          * The default value is `{x: 0, y: 0}`.
          * @platform ios
          */
-        contentOffset: React.PointPropType,
+        contentOffset: PointPropType,
         /**
          * The amount by which the scroll view indicators are inset from the
          * edges of the TableView. This should normally be set to the same
@@ -133,35 +141,35 @@ var TableView = React.createClass({
 
     render: function() {
         return (
-            <View style={[{flex:1},this.props.style]}>
-                <RNTableView
-                    ref={TABLEVIEW}
-                    style={this.props.style}
-                    sections={this.state.sections}
-                    additionalItems={this.state.additionalItems}
-                    tableViewStyle={TableView.Consts.Style.Plain}
-                    tableViewCellStyle={TableView.Consts.CellStyle.Subtitle}
-                    tableViewCellEditingStyle={this.props.tableViewCellEditingStyle}
-                    separatorStyle={TableView.Consts.SeparatorStyle.Line}
-                    scrollIndicatorInsets={this.props.contentInset}
-                    {...this.props}
-                    json={this.state.json}
-                    onPress={this._onPress}
-                    onAccessoryPress={this._onAccessoryPress}
-                    onChange={this._onChange}
-                    onWillDisplayCell={this._onWillDisplayCell}
-                    onEndDisplayingCell={this._onEndDisplayingCell}>
+          <View style={[{flex:1},this.props.style]}>
+              <RNTableView
+                ref={TABLEVIEW}
+                style={this.props.style}
+                sections={this.state.sections}
+                additionalItems={this.state.additionalItems}
+                tableViewStyle={TableView.Consts.Style.Plain}
+                tableViewCellStyle={TableView.Consts.CellStyle.Subtitle}
+                tableViewCellEditingStyle={this.props.tableViewCellEditingStyle}
+                separatorStyle={TableView.Consts.SeparatorStyle.Line}
+                scrollIndicatorInsets={this.props.contentInset}
+                {...this.props}
+                json={this.state.json}
+                onPress={this._onPress}
+                onAccessoryPress={this._onAccessoryPress}
+                onChange={this._onChange}
+                onWillDisplayCell={this._onWillDisplayCell}
+                onEndDisplayingCell={this._onEndDisplayingCell}>
 
-                    {this.state.children}
-                </RNTableView>
-            </View>
+                  {this.state.children}
+              </RNTableView>
+          </View>
         );
     },
 
     _onPress: function(event) {
         var data = event.nativeEvent;
         if (this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.selectedIndex] &&
-            this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.selectedIndex].onPress){
+          this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.selectedIndex].onPress){
             this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.selectedIndex].onPress(data);
         }
         if (this.props.onPress) {
@@ -173,7 +181,7 @@ var TableView = React.createClass({
         console.log('_onAccessoryPress', event);
         var data = event.nativeEvent;
         if (this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.accessoryIndex] &&
-            this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.accessoryIndex].onAccessoryPress){
+          this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.accessoryIndex].onAccessoryPress){
             this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.accessoryIndex].onAccessoryPress(data);
         }
         if (this.props.onAccessoryPress) {
@@ -184,7 +192,7 @@ var TableView = React.createClass({
     _onChange: function(event) {
         var data = event.nativeEvent;
         if (this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.selectedIndex] &&
-            this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.selectedIndex].onChange){
+          this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.selectedIndex].onChange){
             this.sections[data.selectedSection] && this.sections[data.selectedSection].items[data.selectedIndex].onChange(data);
         }
         if (this.props.onChange) {
